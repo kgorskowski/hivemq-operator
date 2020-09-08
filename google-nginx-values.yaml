@@ -1,0 +1,5 @@
+tcp: 
+  1883 : "default/hivemq-hivemq-operator-mqtt:1883"
+controller:
+  service:
+    sessionAffinity: ClientIP

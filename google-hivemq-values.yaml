@@ -1,0 +1,23 @@
+hivemq:
+  nodeCount: 3
+  ephemeralStorage: "5Gi"
+  cpu: 500m
+  memory: 500M
+  ports:
+    - name: "mqtt"
+      port: 1883
+      expose: true
+      patch:
+      - '[{"op":"add","path":"/spec/selector/hivemq.com~1node-offline","value":"false"},{"op":"add","path":"/metadata/annotations","value":{"service.spec.externalTrafficPolicy":"Local"}}]'
+      # If you want Kubernetes to expose the MQTT port
+      - '[{"op":"add","path":"/spec/type","value":"ClusterIP"}]'
+    - name: "cc"
+      port: 8080
+      expose: true
+      patch:
+        - '[{"op":"add","path":"/spec/sessionAffinity","value":"ClientIP"}]'
+monitoring:
+  # Deploy ServiceMonitor for Prometheus Operator and enable Prometheus
+  enabled: true
+  # Deploy a dedicated instance of the prometheus operator, including grafana, as sub-chart
+  dedicated: true
