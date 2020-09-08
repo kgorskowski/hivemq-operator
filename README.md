@@ -1,12 +1,17 @@
 ## Requirements
 
-No requirements.
+terraform version >= 0.13 required to use the "depends_on" feature on modules.
+A project on the Google Cloud with enabled Kubernetes API and a shell logged in (`gcloud login`) with sufficient access permissions on the project to create the necessary resources.
+
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| google | n/a |
+| terraform | >=0.13 |
+| google | ~> 3.37.0 |
+| helm | ~> 1.3.0 |
+| kubernetes | ~> 1.13.1 |
 
 ## Inputs
 
